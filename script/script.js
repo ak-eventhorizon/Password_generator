@@ -56,7 +56,7 @@ function randomElement(array){
 
 
 
-//перемешивание массив
+//перемешивание массива
 function shuffle(array) {
     let currentIndex = array.length; 
     let temporaryValue, randomIndex;
