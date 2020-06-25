@@ -17,27 +17,42 @@ let inputLength = document.getElementById('passLength');
 let btn = document.getElementById('generateBtn');
 //блок для вывода паролей
 let output = document.getElementById('output');
+//блок со статусом "copied to clipboard"
+let copyStatus = document.getElementById('status');
 
 //генерирует пароли длины pswLength
 function passwordGenerate(pswLength){
 
-    let arrPassword = [];
-    let currentPswLength = pswLength;
+    if (pswLength >= 4 && pswLength <= 64) {
+        let arrPassword = [];
+        let currentPswLength = pswLength;
 
-    arrPassword.push(randomElement(arrSmallLetters)); //добавление одной маленькой буквы
-    arrPassword.push(randomElement(arrBigLetters)); //добавление одной большой буквы
-    arrPassword.push(randomElement(arrDigits)); //добавление одной цифры
-    arrPassword.push(randomElement(arrSymbols)); //добавление одного спецсимвола
-    currentPswLength = currentPswLength - 4;
+        arrPassword.push(randomElement(arrSmallLetters)); //добавление одной маленькой буквы
+        arrPassword.push(randomElement(arrBigLetters)); //добавление одной большой буквы
+        arrPassword.push(randomElement(arrDigits)); //добавление одной цифры
+        arrPassword.push(randomElement(arrSymbols)); //добавление одного спецсимвола
+        currentPswLength = currentPswLength - 4;
 
-    while (currentPswLength > 0){
-        arrPassword.push(randomElement(arrAll)); //добавление одного элемента из общего массива
-        currentPswLength--;
+        while (currentPswLength > 0){
+            arrPassword.push(randomElement(arrAll)); //добавление одного элемента из общего массива
+            currentPswLength--;
+        }
+
+        shuffle(arrPassword); //перемешивание массива-пароля
+
+        output.value = arrPassword.join(''); //вывод масива-пароля
+        output.disabled = false; // откючение состояния disabled
+        output.select(); //выделение содержимого поля
+        document.execCommand('copy'); //копирование выделенного в буфер обмена
+        output.disabled = true; // включение состояния disabled
+        copyStatus.classList = ''; //показывание статуса 'скопировано в буфер'
+
+    } else {
+
+        output.value = 'Wrong input range!';
+        copyStatus.classList = 'hidden';
+
     }
-
-    shuffle(arrPassword); //перемешивание массива-пароля
-    output.value = arrPassword.join(''); //вывод масива-пароля
-    output.select();
 }
 
 //возвращает случайный элемент массива
