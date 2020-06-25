@@ -30,6 +30,10 @@ input::-webkit-inner-spin-button {
 	margin: 0;
 }
 
+#passLength {
+	min-width: 4rem;
+}
+
 #generateBtn {
 	height: 8vh;
 	padding: 5px;
