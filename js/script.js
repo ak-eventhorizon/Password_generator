@@ -44,6 +44,7 @@ function passwordGenerate(pswLength){
         output.disabled = false; // откючение состояния disabled
         output.select(); //выделение содержимого поля
         document.execCommand('copy'); //копирование выделенного в буфер обмена
+        // window.getSelection().removeAllRanges(); // убрать выделение
         output.disabled = true; // включение состояния disabled
         copyStatus.classList = ''; //показывание статуса 'скопировано в буфер'
 
